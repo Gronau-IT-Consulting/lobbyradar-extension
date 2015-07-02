@@ -2,7 +2,7 @@ var storage = require("sdk/simple-storage").storage;
 var prefs = require("sdk/simple-prefs").prefs;
 var { setInterval, clearInterval } = require('sdk/timers');
 var Request = require("sdk/request").Request;
-var {ChromeWorker} = require("chrome")
+var {ChromeWorker} = require("chrome");
 var self = require("sdk/self");
 var _ = require("underscore");
 var lobbyradar_tools = require('bg_common').lobbyradar_tools;
@@ -22,7 +22,7 @@ var tabData = false; // wird von initialize gesetzt
 
 function parseNameList(result) {
     var local_names = {};
-    _.each(result,function(ent,uid){
+    _.each(result.result,function(ent,uid){
         local_names[uid]={names:ent[1], connections:_.uniq(ent[2]), regexes:new Array(), uid:uid};
         // make Regexes from names
         _.each(local_names[uid].names,function(name) {
@@ -47,7 +47,7 @@ function parseNameList(result) {
 
 // führendes www abschneiden
 function parseWhitelist(result) {
-    var res = _.map(result,function(url){ return url.toLowerCase().replace(/www\./,'');});
+    var res = _.map(result.result,function(url){ return url.toLowerCase().replace(/www\./,'');});
     console.log(_.size(res)+' urls in whitelist');
     return res;
 }

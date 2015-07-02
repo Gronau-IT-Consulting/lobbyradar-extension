@@ -11,7 +11,7 @@ var callbackQ = [];
 
 function parseNameList(result) {
     var local_names = {};
-    _.each(result,function(ent,uid){
+    _.each(result.result,function(ent,uid){
         local_names[uid]={names:ent[1], connections:_.uniq(ent[2]), regexes:new Array(), uid:uid};
 
         // make Regexes from names
@@ -32,7 +32,7 @@ function parseNameList(result) {
 
 // führendes www abschneiden
 function parseWhitelist(result) {
-    var res = _.map(result,function(url){ return url.toLowerCase().replace(/www\./,'');});
+    var res = _.map(result.result,function(url){ return url.toLowerCase().replace(/www\./,'');});
     console.log(_.size(res)+' urls in whitelist');
     return res;
 }
